@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>年表ワイヤー｜思惟の森の会 写真アーカイブ</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&display=swap" rel="stylesheet">
+<style>
+/* 配置と寸法を確かめるためのワイヤー。写真はすべて仮の絵。文字は 20px 以上。 */
+:root{
+  --bg:#F8F9FB; --surface:#FFFFFF; --ink:#1A1A1A; --muted:#6B7280; --rule:#E5E7EB;
+  --accent:#2F5D3A; --line:#CBD7CE; --glow:47,93,58;
+  --r-photo:20px; --r-tile:12px;
+}
+*{box-sizing:border-box}
+html{font-size:20px}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Noto Sans JP","Noto Sans CJK JP","Hiragino Sans","Yu Gothic",Meiryo,sans-serif;font-size:1rem;line-height:1.6;-webkit-font-smoothing:antialiased}
+[hidden]{display:none !important}
+button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:pointer;text-align:inherit}
+:focus-visible{outline:3px solid var(--accent);outline-offset:4px;border-radius:6px}
+img{display:block;width:100%;height:100%;object-fit:cover}
+
+/* ---- ヘッダー ---- */
+.top{background:var(--surface);border-bottom:1px solid var(--rule)}
+.top-in{max-width:1160px;margin:0 auto;padding:16px 40px;display:flex;flex-wrap:wrap;align-items:center;gap:8px 32px}
+.site{font-weight:700;margin-right:auto}
+.tabs{display:flex;gap:28px}
+.tab{padding:4px 0;border-bottom:3px solid transparent}
+.tab[aria-current="page"]{font-weight:700;border-bottom-color:var(--accent)}
+.out{color:var(--muted)}
+.wire-note{max-width:1160px;margin:0 auto;padding:12px 40px;color:var(--muted)}
+
+/* ---- 年表トップ ---- */
+.page{max-width:1160px;margin:0 auto 80px;background:var(--surface);padding:56px 40px 120px;display:grid;grid-template-columns:132px minmax(0,1fr);column-gap:48px}
+.decades{position:sticky;top:24px;align-self:start;display:flex;flex-direction:column;gap:6px;padding-top:112px}
+.decades button{color:var(--muted);padding:2px 0;white-space:nowrap}
+.decades button.is-now{color:var(--accent);font-weight:700}
+.main{max-width:880px;width:100%}
+.h1{font-size:56px;font-weight:700;line-height:1.2;margin:0 0 48px;letter-spacing:.02em}
+
+.tl{position:relative}
+.tl::before{content:"";position:absolute;left:50%;top:0;bottom:0;width:2px;margin-left:-1px;background:var(--line)}
+.yr{position:relative;display:grid;grid-template-columns:minmax(0,1fr) 120px minmax(0,1fr);align-items:center;width:100%;margin:0 0 8px}
+.yr .ph{aspect-ratio:5/4;border-radius:var(--r-photo);overflow:hidden;background:var(--rule)}
+.yr .dot{grid-column:2;grid-row:1;justify-self:center;width:40px;height:40px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 10px rgba(var(--glow),.10),0 0 28px 4px rgba(var(--glow),.40)}
+.yr .lab{display:flex;flex-direction:column;gap:2px}
+.yr .wa{color:var(--accent);font-weight:700;font-size:1rem;line-height:1.4}
+.yr .y{font-weight:700;font-size:56px;line-height:1.1;letter-spacing:.01em}
+.yr .y.long{font-size:40px}
+.yr.side-r .ph{grid-column:3;grid-row:1}
+.yr.side-r .lab{grid-column:1;grid-row:1;align-items:flex-end;text-align:right}
+.yr.side-l .ph{grid-column:1;grid-row:1}
+.yr.side-l .lab{grid-column:3;grid-row:1}
+button.yr:hover .ph{opacity:.9}
+/* 写真のない年：線の上に、薄い色の年だけを置く */
+.yr.empty{display:flex;justify-content:center;margin:16px 0 24px}
+.yr.empty .dot{display:none}
+.yr.empty .lab{position:relative;background:var(--surface);color:var(--muted);padding:6px 0}
+.yr.empty .y{font-size:1rem;font-weight:400;line-height:1.4}
+
+/* ---- 年のページ ---- */
+.year{max-width:1160px;margin:0 auto 80px;background:var(--surface);padding:40px 40px 96px}
+.back{color:var(--accent);font-weight:700}
+.year .wa{color:var(--accent);font-weight:700;margin:40px 0 0}
+.year .yh{font-size:72px;font-weight:700;line-height:1.1;margin:0 0 32px;letter-spacing:.01em}
+.evnav{position:sticky;top:0;z-index:2;background:var(--surface);display:flex;gap:10px;overflow-x:auto;padding:12px 0;margin-bottom:24px;border-bottom:1px solid var(--rule)}
+.evnav button{white-space:nowrap;padding:6px 18px;border:1px solid var(--rule);border-radius:999px}
+.evnav button.is-now{background:var(--accent);border-color:var(--accent);color:#fff;font-weight:700}
+.ev{margin:0 0 56px;scroll-margin-top:88px}
+.ev h2{font-size:32px;font-weight:700;line-height:1.3;margin:0;display:inline}
+.ev .cnt{color:var(--muted);margin-left:16px}
+.grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;margin-top:20px}
+.tile{aspect-ratio:4/3;border-radius:var(--r-tile);overflow:hidden;background:var(--rule)}
+.pn{display:flex;justify-content:space-between;gap:16px;border-top:1px solid var(--rule);padding-top:32px}
+.pn button{font-weight:700;color:var(--accent)}
+
+/* ---- 幅 1099px 以下：年代の索引を上の帯へ ---- */
+@media (max-width:1099px){
+  .page{grid-template-columns:minmax(0,1fr)}
+  .decades{position:sticky;top:0;z-index:2;flex-direction:row;gap:20px;overflow-x:auto;background:var(--surface);padding:12px 0;margin:0 0 24px;border-bottom:1px solid var(--rule)}
+  .main{margin:0 auto}
+  .grid{grid-template-columns:repeat(3,minmax(0,1fr))}
+}
+/* ---- スマホ：線を左に寄せ、年の下に写真 ---- */
+@media (max-width:767px){
+  .top-in{padding:12px 16px;gap:4px 24px}
+  .site{flex-basis:100%}
+  .out{margin-left:auto}
+  .wire-note{padding:8px 16px}
+  .page{padding:16px 16px 96px;margin-bottom:40px}
+  .h1{font-size:40px;margin-bottom:28px}
+  .tl::before{left:6px;margin-left:-1px}
+  .yr{grid-template-columns:32px minmax(0,1fr);align-items:start;row-gap:10px;margin-bottom:36px}
+  .yr .dot{grid-column:1;grid-row:1;justify-self:start;width:12px;height:12px;margin-top:9px;box-shadow:0 0 0 5px rgba(var(--glow),.12)}
+  .yr.side-r .lab,.yr.side-l .lab{grid-column:2;grid-row:1;align-items:flex-start;text-align:left}
+  .yr.side-r .ph,.yr.side-l .ph{grid-column:2;grid-row:2;border-radius:14px}
+  .yr .y{font-size:40px}
+  .yr .y.long{font-size:32px}
+  .yr.empty{display:grid;justify-content:stretch;margin:0 0 24px}
+  .yr.empty .dot{display:block;width:8px;height:8px;margin:10px 0 0 2px;background:var(--line);box-shadow:none}
+  .yr.empty .lab{grid-column:2;padding:0;background:none}
+  .year{padding:20px 16px 72px;margin-bottom:40px}
+  .year .wa{margin-top:24px}
+  .year .yh{font-size:52px;margin-bottom:20px}
+  .ev h2{font-size:28px}
+  .grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media (prefers-reduced-motion:reduce){*{scroll-behavior:auto !important}}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="top-in">
+    <span class="site">思惟の森の会 写真アーカイブ</span>
+    <nav class="tabs" aria-label="画面の切り替え">
+      <button class="tab" type="button">マップ</button>
+      <button class="tab" type="button" aria-current="page" id="tabTimeline">年表</button>
+    </nav>
+    <button class="out" type="button">ログアウト</button>
+  </div>
+</header>
+<p class="wire-note">配置を確かめるためのワイヤーです。写真は仮の絵で、年ごとの枚数も仮の数です。</p>
+
+<!-- 年表トップ：1 年につき写真 1 枚。説明文は置かない -->
+<div class="page" id="viewTimeline">
+  <nav class="decades" id="decades" aria-label="年代へ移動"></nav>
+  <main class="main">
+    <h1 class="h1">年表</h1>
+    <div class="tl" id="tl"></div>
+  </main>
+</div>
+
+<!-- 年のページ：その年のイベントごとに写真を並べる -->
+<main class="year" id="viewYear" hidden>
+  <button class="back" type="button" id="back">← 年表</button>
+  <p class="wa" id="yWa"></p>
+  <h1 class="yh" id="yH"></h1>
+  <nav class="evnav" id="evnav" aria-label="この年のイベント"></nav>
+  <div id="events"></div>
+  <nav class="pn" aria-label="前後の年"><button type="button" id="prevY"></button><button type="button" id="nextY"></button></nav>
+</main>
+
+<script>
+/* ---- 仮データ ---- */
+const FIRST = 1966, LAST = 2026;
+const EMPTY = new Set([1967, 1973, 2020]);          // 写真のない年の例
+function wareki(y){
+  if (y >= 2019) return `令和${y - 2018 === 1 ? '元' : y - 2018}年`;
+  if (y >= 1989) return `平成${y - 1988 === 1 ? '元' : y - 1988}年`;
+  return `昭和${y - 1925}年`;
+}
+function rng(seed){ let t = seed >>> 0; return () => { t += 0x6D2B79F5; let r = Math.imul(t ^ t >>> 15, 1 | t); r ^= r + Math.imul(r ^ r >>> 7, 61 | r); return ((r ^ r >>> 14) >>> 0) / 4294967296; }; }
+
+/* 仮の写真（空・山・手前の斜面だけの絵） */
+const SKIES = [['#DCE9F5','#F6EEE6'],['#8DBDE4','#E4F1FA'],['#F1CFA2','#FBEFE0'],['#C9D3DA','#F0F3F5'],['#B7D3E8','#F3F6EE']];
+const LANDS = [['#9DB89A','#5F8A5B','#3F6B45'],['#A9C7A0','#6FA05F','#4B7B48'],['#C9B27A','#A98548','#6E6A3E'],['#B8C2B0','#8A9A86','#5D6F5E'],['#9CC0B5','#5E9A8B','#3D7468']];
+function placeholder(seed){
+  const r = rng(seed), sky = SKIES[Math.floor(r() * SKIES.length)], land = LANDS[Math.floor(r() * LANDS.length)];
+  const hill = (base, amp, col) => { let d = `M0,300 L0,${base}`; for (let x = 0; x < 400; x += 80) d += ` Q${x + 40},${base - amp * (0.3 + r())} ${x + 80},${base - amp * 0.2 * r()}`; return `<path d="${d} L400,300Z" fill="${col}"/>`; };
+  const sun = r() < 0.5 ? `<circle cx="${60 + r() * 280}" cy="${50 + r() * 50}" r="${14 + r() * 10}" fill="#fff" opacity=".7"/>` : '';
+  const svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" preserveAspectRatio="xMidYMid slice"><defs><linearGradient id="s" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="${sky[0]}"/><stop offset="1" stop-color="${sky[1]}"/></linearGradient></defs><rect width="400" height="300" fill="url(#s)"/>${sun}${hill(170, 70, land[0])}${hill(215, 55, land[1])}${hill(262, 40, land[2])}</svg>`;
+  return 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(svg);
+}
+
+/* 年表に並ぶ行：年、写真のない年、年代だけ分かる写真、年代不明 */
+const rows = [];
+for (let y = FIRST; y <= LAST; y++) {
+  rows.push(EMPTY.has(y) ? { key: String(y), empty: true, big: String(y), decade: Math.floor(y / 10) * 10 }
+                         : { key: String(y), small: wareki(y), big: String(y), decade: Math.floor(y / 10) * 10 });
+  if (y === 1979) rows.push({ key: '1970s', small: '年不明', big: '1970年代', long: true, decade: 1970 });
+}
+rows.push({ key: 'unknown', small: '年不明', big: '年代不明', long: true, decade: null });
+const photoRows = rows.filter((r) => !r.empty);
+
+/* ---- 年表トップ ---- */
+const tl = document.getElementById('tl');
+let side = 0;
+tl.innerHTML = rows.map((r) => {
+  if (r.empty) return `<div class="yr empty" data-decade="${r.decade}"><span class="dot"></span><span class="lab"><span class="y">${r.big}</span></span></div>`;
+  const cls = side++ % 2 === 0 ? 'side-r' : 'side-l';
+  return `<button type="button" class="yr ${cls}" data-key="${r.key}" data-decade="${r.decade ?? ''}" aria-label="${r.big}${r.small === '年不明' ? '（年不明）' : ''}の写真を見る">
+    <span class="ph"><img src="${placeholder(r.key.split('').reduce((a, c) => a * 31 + c.charCodeAt(0), 7))}" alt="" loading="lazy"></span>
+    <span class="dot"></span>
+    <span class="lab"><span class="wa">${r.small}</span><span class="y${r.long ? ' long' : ''}">${r.big}</span></span>
+  </button>`;
+}).join('');
+tl.addEventListener('click', (e) => { const b = e.target.closest('button.yr'); if (b) openYear(b.dataset.key); });
+
+/* 年代の索引 */
+const decades = [...new Set(rows.map((r) => r.decade).filter((d) => d != null))];
+const dnav = document.getElementById('decades');
+dnav.innerHTML = decades.map((d) => `<button type="button" data-d="${d}">${d}年代</button>`).join('');
+dnav.addEventListener('click', (e) => {
+  const b = e.target.closest('button'); if (!b) return;
+  const first = tl.querySelector(`.yr[data-decade="${b.dataset.d}"]`);
+  const offset = window.matchMedia('(max-width:1099px)').matches ? dnav.offsetHeight + 12 : 24;
+  window.scrollTo({ top: first.getBoundingClientRect().top + window.scrollY - offset, behavior: 'smooth' });
+});
+const io = new IntersectionObserver((ents) => {
+  ents.forEach((en) => { if (en.isIntersecting && en.target.dataset.decade) dnav.querySelectorAll('button').forEach((b) => b.classList.toggle('is-now', b.dataset.d === en.target.dataset.decade)); });
+}, { rootMargin: '-30% 0px -60% 0px' });
+tl.querySelectorAll('.yr').forEach((el) => io.observe(el));
+dnav.querySelector('button').classList.add('is-now');
+
+/* ---- 年のページ ---- */
+const viewT = document.getElementById('viewTimeline'), viewY = document.getElementById('viewYear');
+let lastScroll = 0, currentKey = null;
+function eventsOf(key){
+  const r = rng(key.split('').reduce((a, c) => a * 33 + c.charCodeAt(0), 11));
+  if (!/^\d{4}$/.test(key)) return [{ name: '夏合宿', n: 8 }, { name: 'その他', n: 6 }];
+  const ev = [{ name: '春合宿', n: 8 + Math.floor(r() * 8) }, { name: '夏合宿', n: 12 + Math.floor(r() * 12) }, { name: '秋合宿', n: 8 + Math.floor(r() * 8) }];
+  if (r() < 0.7) ev.push({ name: '菅窪祭り', n: 4 + Math.floor(r() * 6) });
+  if (r() < 0.5) ev.push({ name: '早稲田祭', n: 4 + Math.floor(r() * 4) });
+  return ev;
+}
+function openYear(key){
+  const row = photoRows.find((r) => r.key === key); if (!row) return;
+  if (!viewT.hidden) lastScroll = window.scrollY;
+  currentKey = key;
+  document.getElementById('yWa').textContent = row.small;
+  document.getElementById('yH').textContent = row.big;
+  const ev = eventsOf(key);
+  document.getElementById('evnav').innerHTML = ev.map((e, i) => `<button type="button" data-i="${i}"${i === 0 ? ' class="is-now"' : ''}>${e.name}</button>`).join('');
+  document.getElementById('events').innerHTML = ev.map((e, i) => `<section class="ev" id="ev${i}"><h2>${e.name}</h2><span class="cnt">${e.n} 枚</span>
+    <div class="grid">${Array.from({ length: e.n }, (_, k) => `<span class="tile"><img src="${placeholder(key.length * 977 + i * 131 + k * 17 + Number(key.replace(/\D/g, '') || 5))}" alt="" loading="lazy"></span>`).join('')}</div></section>`).join('');
+  const idx = photoRows.indexOf(row), prev = photoRows[idx - 1], next = photoRows[idx + 1];
+  const p = document.getElementById('prevY'), n = document.getElementById('nextY');
+  p.textContent = prev ? `← ${prev.big}` : ''; p.dataset.key = prev ? prev.key : ''; p.style.visibility = prev ? 'visible' : 'hidden';
+  n.textContent = next ? `${next.big} →` : ''; n.dataset.key = next ? next.key : ''; n.style.visibility = next ? 'visible' : 'hidden';
+  viewT.hidden = true; viewY.hidden = false; window.scrollTo(0, 0);
+}
+function backToTimeline(){ viewY.hidden = true; viewT.hidden = false; window.scrollTo(0, lastScroll); }
+document.getElementById('back').addEventListener('click', backToTimeline);
+document.getElementById('tabTimeline').addEventListener('click', () => { if (viewT.hidden) backToTimeline(); });
+document.getElementById('prevY').addEventListener('click', (e) => e.currentTarget.dataset.key && openYear(e.currentTarget.dataset.key));
+document.getElementById('nextY').addEventListener('click', (e) => e.currentTarget.dataset.key && openYear(e.currentTarget.dataset.key));
+document.getElementById('evnav').addEventListener('click', (e) => {
+  const b = e.target.closest('button'); if (!b) return;
+  document.querySelectorAll('#evnav button').forEach((x) => x.classList.toggle('is-now', x === b));
+  document.getElementById('ev' + b.dataset.i).scrollIntoView({ behavior: 'smooth', block: 'start' });
+});
+</script>
+</body>
+</html>

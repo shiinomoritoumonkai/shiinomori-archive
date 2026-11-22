@@ -155,3 +155,12 @@ vite.config.ts.timestamp-*
 .nx/cache
 .nx/workspace-data
 .nx/migrate-runs
+
+# 思惟の森アーカイブ（docs/SPEC.md §3.4・§12.1）
+public/data/
+local/
+.env
+.env.*
+!.env.example
+*service-account*.json
+.DS_Store
