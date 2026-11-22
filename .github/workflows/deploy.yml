@@ -1,6 +1,7 @@
 # SPEC §12.2
 # - pull_request：フィクスチャでテストとビルドだけ（秘密の値は使わない）
 # - main への push と手動実行：テスト → 実データで ingest build → ビルド → check:public → Pages へデプロイ
+# - 手動実行で source=fixtures を選ぶと、仮データ（フィクスチャ）でデプロイする（Secrets 不要。Drive の準備前にサイトの形を見るため）
 name: build-and-deploy
 
 on:
@@ -8,6 +9,12 @@ on:
   push:
     branches: [main]
   workflow_dispatch:
+    inputs:
+      source:
+        description: 'データの元（drive = 実データ、fixtures = 仮データのデモ）'
+        type: choice
+        default: drive
+        options: [drive, fixtures]
 
 concurrency:
   group: pages
@@ -15,6 +22,9 @@ concurrency:
 
 permissions:
   contents: read
+
+env:
+  PAGES_BASE: ${{ vars.PAGES_BASE || format('/{0}/', github.event.repository.name) }}
 
 jobs:
   test:
@@ -31,11 +41,7 @@ jobs:
       - run: pnpm test
       - run: pnpm exec playwright install --with-deps chromium
       - run: pnpm e2e:prepare
-        env:
-          PAGES_BASE: /${{ github.event.repository.name }}/
       - run: pnpm e2e
-        env:
-          PAGES_BASE: /${{ github.event.repository.name }}/
       - run: pnpm check:public
       - uses: actions/upload-artifact@v4
         if: failure()
@@ -64,6 +70,7 @@ jobs:
           cache: pnpm
       - run: pnpm install --frozen-lockfile
       - name: Ingest from Drive (counts only in logs)
+        if: inputs.source != 'fixtures'
         run: pnpm ingest build
         env:
           CI: 'true'
@@ -71,9 +78,15 @@ jobs:
           GOOGLE_SERVICE_ACCOUNT_KEY_B64: ${{ secrets.GOOGLE_SERVICE_ACCOUNT_KEY_B64 }}
           DRIVE_ARCHIVE_ROOT_ID: ${{ secrets.DRIVE_ARCHIVE_ROOT_ID }}
           DRIVE_MAP_ROOT_ID: ${{ secrets.DRIVE_MAP_ROOT_ID }}
+      - name: Build data from fixtures (demo)
+        if: inputs.source == 'fixtures'
+        run: pnpm fixtures && pnpm ingest build --from fixtures/listing.json
+        env:
+          CI: 'true'
+          SITE_PASSWORD: demo-shiinomori-2026
       - run: pnpm build
         env:
-          PAGES_BASE: ${{ vars.PAGES_BASE || format('/{0}/', github.event.repository.name) }}
+          VITE_PHOTO_SOURCE: ${{ inputs.source == 'fixtures' && 'local' || '' }}
       - run: pnpm check:public
         env:
           DRIVE_ARCHIVE_ROOT_ID: ${{ secrets.DRIVE_ARCHIVE_ROOT_ID }}

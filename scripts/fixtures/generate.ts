@@ -1,5 +1,5 @@
 // pnpm fixtures：Drive API の応答と同じ形の仮の一覧（§4.3 のツリー ＋ 12,000 枚相当）を fixtures/listing.json に書く（SPEC §10 の 2）
-// 画像は Vite のプラグイン（vite.config.ts）が /fixture-img/{id}.svg で ID から生成するので、ファイルは作らない。
+// 画像は VITE_PHOTO_SOURCE=local のとき photoUrl が ID から data: URL で生成するので、ファイルは作らない。
 import { mkdirSync, writeFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { file, flatten, folder, landscape, portrait, resetIds } from '../../shared/testTree.ts';

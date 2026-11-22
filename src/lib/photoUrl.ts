@@ -1,6 +1,7 @@
 // Drive の画像 URL を組み立てる唯一の場所（SPEC §3.4 の 6、付録 B）。
 // URL の形は config/site.json の images にあり、M0 の実測で確定する。
 import site from '../../config/site.json' with { type: 'json' };
+import { placeholderSvg, seedOf } from '../../scripts/fixtures/placeholder.ts';
 import type { PhotoRef } from '../../shared/types.ts';
 
 export type PhotoSize = 'tile' | 'cover' | 'viewer';
@@ -28,8 +29,10 @@ export function widthOf(size: PhotoSize): number {
 export function photoUrl(ref: PhotoRef, size: PhotoSize, variant: PhotoVariant = 'primary'): string {
   const w = widthOf(size);
   if (isLocal()) {
-    const base = (import.meta as unknown as { env?: { BASE_URL?: string } }).env?.BASE_URL ?? '/';
-    return `${base}fixture-img/${encodeURIComponent(ref.id)}.svg?w=${w}&v=${variant}`;
+    // フィクスチャ用：ID から仮画像をその場で作る（静的サイトでも動く）。1/40 は表示用 URL の失敗を模し、予備 URL は成功する
+    const seed = seedOf(ref.id);
+    if (variant === 'primary' && seed % 40 === 0) return 'data:image/svg+xml,broken';
+    return `data:image/svg+xml;charset=utf-8,${encodeURIComponent(placeholderSvg(ref.id, w, seed % 4 === 1))}`;
   }
   return fill(variant === 'primary' ? images.primary : images.fallback, ref, w);
 }
