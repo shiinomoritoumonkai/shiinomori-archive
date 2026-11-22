@@ -10,8 +10,8 @@ export type PhotoVariant = 'primary' | 'fallback';
 const images = site.images;
 
 function isLocal(): boolean {
-  const env = (import.meta as unknown as { env?: Record<string, string | undefined> }).env;
-  return env?.VITE_PHOTO_SOURCE === 'local';
+  // Node（取り込みスクリプト）では import.meta.env が無い
+  return import.meta.env?.VITE_PHOTO_SOURCE === 'local';
 }
 
 function fill(template: string, ref: PhotoRef, w?: number): string {
