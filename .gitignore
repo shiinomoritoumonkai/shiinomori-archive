@@ -164,6 +164,6 @@ local/
 !.env.example
 *service-account*.json
 .DS_Store
-fixtures/
+/fixtures/
 test-results/
 playwright-report/
