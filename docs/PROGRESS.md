@@ -27,7 +27,7 @@
 - 2026-11-22 push 済み（gh で `shiinomoritoumonkai` としてブラウザ認証。`gh auth setup-git`。scope に workflow が必要だった）。Actions の test ジョブは GitHub 上でも通過（E2E 20 件）。
 - **仮データ版をデプロイ済み**：https://shiinomoritoumonkai.github.io/shiinomori-archive/ （合言葉 `demo-shiinomori-2026`）。手動実行の source=fixtures。実データ版は production の Secrets（SETUP.md 4.2）が未設定のため、push のたびに deploy ジョブが「SITE_PASSWORD がありません」で止まる（公開中の仮データ版はそのまま残る）。
 - Secrets が入ったら：Actions を source=drive で実行 → デプロイ先で合言葉 → レポート → マップ → 年表を稲葉さんが PC と iPhone で確認（M2・M5 の締め）。CI ログに ID・名前・パスがないことを目視（今回のログは変数名のみで値は出ていなかった）。
-- 稲葉さんの返事待ち：(1) フォルダ名 `1988夏` 形式（規則を緩めるか、改名するか）、(2) `/1961/1960`、(3) マップ用フォルダへの写真、(4) M0 の他環境確認（`local/spike/README.md` 手順 3）、(5) 実物のマップ画像とスポットの座標（`?picker=1`）。
+- 稲葉さんの返事待ち：(1) フォルダ名 `1988夏` 形式 → 緩和案を PR #1（ブランチ `relaxed-year-names`）に用意。採用ならマージ、不採用なら閉じて Drive 側を改名、(2) `/1961/1960`、(3) マップ用フォルダへの写真、(4) M0 の他環境確認（`local/spike/README.md` 手順 3）、(5) 実物のマップ画像とスポットの座標（`?picker=1`）。
 - 残りの M5：実データでの通し確認（最多年の灰色残り 1% 未満）、SETUP.md の最終化（push 権限の項を追加済み）。
 - E2E の `?p=0` の不安定さは、ビューアのキー操作が古い index を使う競合だった（修正済み）。
 
