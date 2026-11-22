@@ -1,9 +1,9 @@
 # shiinomori-archive
 
-思惟の森の会 写真アーカイブ（GitHub Pages ＋ Google Drive）。仕様は `docs/SPEC.md`、進捗は `docs/PROGRESS.md`。セッション開始時はこの 2 つを読む。
+思惟の森の会 写真アーカイブ（GitHub Pages ＋ Google Drive）。仕様は `docs/SPEC.md`、進捗は `docs/PROGRESS.md`。セッション開始時はこの 2 つを読む。運用手順は `docs/OPERATIONS.md`、M0 の実測は `docs/SPIKE.md`。
 
 ## コマンド（pnpm / Node 22）
-- `pnpm dev` 開発サーバー／`pnpm build` ビルド／`pnpm preview`
+- `pnpm dev` 開発サーバー（仮画像）／`pnpm dev:drive` 実 Drive の画像で／`pnpm build` ビルド／`pnpm preview`
 - `pnpm test` Vitest／`pnpm e2e` Playwright（フィクスチャで実行）
 - `pnpm fixtures` フィクスチャ生成 → `pnpm ingest build --from fixtures/listing.json`
 - `pnpm ingest build|check|verify` 取り込み（`.env` が必要）

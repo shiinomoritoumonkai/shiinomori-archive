@@ -92,7 +92,10 @@ base64 -i ~/Downloads/＜ダウンロードした鍵＞.json | tr -d '\n' | pbco
 
 Variables（公開してよい値）は、独自ドメインを使うときに `PAGES_BASE=/` を追加します（§5）。いまは不要です。
 
-### 4.3 Actions の権限
+### 4.3 push する人の権限
+- 手元の Mac から `git push` するアカウント（キーチェーンに保存されている GitHub アカウント）が、このリポジトリに書き込めることが必要です。リポジトリの所有者と違うアカウントで push するときは、Settings →「Collaborators」でそのアカウントを **Write** で追加してください。
+
+### 4.4 Actions の権限
 - 左メニュー「Actions」→「General」→「Workflow permissions」が **Read and write permissions** になっていなくてもよい（ワークフロー側で `pages: write` と `id-token: write` を個別に指定します）。既定のままで進めてください。
 
 ## 5. あとで：独自ドメインを使うとき
