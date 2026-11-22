@@ -36,10 +36,14 @@ export function Viewer({ photos, index, caption, onIndex, onClose }: Props) {
   const [failed, setFailed] = useState(false);
   const closeBtn = useRef<HTMLButtonElement>(null);
   const touch = useRef<{ x: number; y: number; id: number } | null>(null);
+  // キー操作は 1 回だけ登録し、最新の index・枚数・コールバックは ref から読む（連打しても古い index で動かないように）
+  const latest = useRef({ index, length: photos.length, onIndex, onClose });
+  latest.current = { index, length: photos.length, onIndex, onClose };
 
   const go = (d: number): void => {
-    const next = index + d;
-    if (next >= 0 && next < photos.length) onIndex(next);
+    const { index: cur, length, onIndex: emit } = latest.current;
+    const next = cur + d;
+    if (next >= 0 && next < length) emit(next);
   };
 
   useEffect(() => {
@@ -62,7 +66,7 @@ export function Viewer({ photos, index, caption, onIndex, onClose }: Props) {
     const prev = document.activeElement as HTMLElement | null;
     closeBtn.current?.focus();
     const onKey = (e: KeyboardEvent): void => {
-      if (e.key === 'Escape') onClose();
+      if (e.key === 'Escape') latest.current.onClose();
       else if (e.key === 'ArrowLeft') go(-1);
       else if (e.key === 'ArrowRight') go(1);
       else return;
@@ -75,7 +79,7 @@ export function Viewer({ photos, index, caption, onIndex, onClose }: Props) {
       document.body.style.overflow = '';
       prev?.focus?.();
     };
-  }, [index, photos.length]);
+  }, []);
 
   if (!photo) return null;
   const cap = caption(photo, index);

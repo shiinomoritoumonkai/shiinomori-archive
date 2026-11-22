@@ -60,10 +60,12 @@ export function MapStage({ spots, activeId, dimIds, onPin, onPick, handle, child
     const s = fitScale.current * (mobile ? mapConfig.mobileInitialZoom : mapConfig.desktopInitialZoom);
     const cx = (mapConfig.initialCenter.x / 100) * IMG_W;
     const cy = (mapConfig.initialCenter.y / 100) * IMG_H;
-    view.current = { s, tx: r.width / 2 - cx * s, ty: r.height / 2 - cy * s };
+    view.current = { s, tx: clampAxis(r.width / 2 - cx * s, r.width, IMG_W * s), ty: clampAxis(r.height / 2 - cy * s, r.height, IMG_H * s) };
     apply();
     setReady(true);
   };
+  /** 画像が枠に収まるなら中央に、収まらないなら端に隙間が出ない範囲に */
+  const clampAxis = (t: number, frame: number, size: number): number => (size <= frame ? (frame - size) / 2 : clamp(t, frame - size, 0));
   const focus = (spot: Spot): void => {
     const r = rect();
     const v = view.current;
