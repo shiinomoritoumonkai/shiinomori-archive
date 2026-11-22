@@ -4,6 +4,7 @@ import { Header } from './components/Header.tsx';
 import { navigate, useRoute } from './lib/router.ts';
 import { getSession, restoreSession, subscribeSession, type SessionState } from './lib/session.ts';
 import { LoginPage } from './pages/Login.tsx';
+import { MapPage } from './pages/Map.tsx';
 import { PlaceholderPage } from './pages/Placeholder.tsx';
 import { ReportPage } from './pages/Report.tsx';
 
@@ -41,7 +42,7 @@ export function App() {
   let current: 'map' | 'timeline' | 'other' = 'other';
   if (head === 'map') {
     current = 'map';
-    page = <PlaceholderPage title="マップ" />;
+    page = <MapPage cryptoKey={key} route={route} />;
   } else if (head === 'timeline') {
     current = 'timeline';
     page = <PlaceholderPage title="年表" />;
