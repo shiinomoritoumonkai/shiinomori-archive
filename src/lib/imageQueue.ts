@@ -108,6 +108,8 @@ export function loadImage(ref: PhotoRef, size: PhotoSize, priority: () => number
   const promise = new Promise<LoadResult>((resolve, reject) => {
     task = { ref, size, priority, resolve, reject, cancelled: false };
   });
+  // キャンセルの reject を「未処理の例外」にしない（先読みなど、結果を待たない呼び出しがある）
+  promise.catch(() => {});
   queue.push(task);
   pump();
   return {

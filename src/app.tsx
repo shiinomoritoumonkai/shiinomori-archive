@@ -5,8 +5,9 @@ import { navigate, useRoute } from './lib/router.ts';
 import { getSession, restoreSession, subscribeSession, type SessionState } from './lib/session.ts';
 import { LoginPage } from './pages/Login.tsx';
 import { MapPage } from './pages/Map.tsx';
-import { PlaceholderPage } from './pages/Placeholder.tsx';
 import { ReportPage } from './pages/Report.tsx';
+import { TimelinePage } from './pages/Timeline.tsx';
+import { YearPage } from './pages/Year.tsx';
 
 function useSession(): SessionState {
   const [s, setS] = useState(getSession);
@@ -37,7 +38,7 @@ export function App() {
   if (session.status === 'out') return route.path === '/login' ? <LoginPage next={route.params.get('next') ?? ''} /> : <main class="gate" />;
 
   const key = session.key;
-  const [head] = route.segments;
+  const [head, second] = route.segments;
   let page;
   let current: 'map' | 'timeline' | 'other' = 'other';
   if (head === 'map') {
@@ -45,7 +46,7 @@ export function App() {
     page = <MapPage cryptoKey={key} route={route} />;
   } else if (head === 'timeline') {
     current = 'timeline';
-    page = <PlaceholderPage title="年表" />;
+    page = second ? <YearPage cryptoKey={key} route={route} yearKey={decodeURIComponent(second)} key={second} /> : <TimelinePage cryptoKey={key} />;
   } else if (head === 'report') {
     page = <ReportPage cryptoKey={key} />;
   } else {

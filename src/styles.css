@@ -65,6 +65,17 @@ code {
 .muted {
   color: var(--muted);
 }
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
 
 /* ---- ヘッダー ---- */
 .top {
@@ -711,5 +722,365 @@ code {
   }
   .v-img img {
     max-height: calc(100dvh - 200px);
+  }
+}
+
+/* ---- 年表のトップ（SPEC §7.3。寸法は docs/reference/timeline-wireframe.html） ---- */
+.tl-page {
+  max-width: var(--max);
+  margin: 0 auto 80px;
+  background: var(--surface);
+  padding: 56px var(--gutter) 120px;
+  display: grid;
+  grid-template-columns: 132px minmax(0, 1fr);
+  column-gap: 48px;
+}
+.decades {
+  position: sticky;
+  top: 24px;
+  align-self: start;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding-top: 112px;
+}
+.decades button {
+  color: var(--muted);
+  padding: 2px 0;
+  white-space: nowrap;
+}
+.decades button.is-now {
+  color: var(--accent);
+  font-weight: 700;
+}
+.tl-main {
+  max-width: 880px;
+  width: 100%;
+}
+.tl {
+  position: relative;
+}
+.tl::before {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  margin-left: -1px;
+  background: var(--line);
+}
+.era {
+  position: relative;
+  text-align: center;
+  margin: 24px 0 16px;
+}
+.era::before {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 100px;
+  margin-left: -50px;
+  height: 100%;
+  margin-top: -50%;
+  background: var(--surface);
+  z-index: 0;
+}
+.era > * {
+  position: relative;
+}
+.yr {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 120px minmax(0, 1fr);
+  align-items: center;
+  width: 100%;
+  margin: 0 0 8px;
+  color: var(--ink);
+}
+.yr:hover {
+  text-decoration: none;
+}
+.yr .yr-ph {
+  border-radius: var(--r-photo);
+}
+.yr .dot {
+  grid-column: 2;
+  grid-row: 1;
+  justify-self: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 0 10px rgba(var(--glow), 0.1), 0 0 28px 4px rgba(var(--glow), 0.4);
+}
+.yr .lab {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.yr .wa {
+  color: var(--accent);
+  font-weight: 700;
+  font-size: 1rem;
+  line-height: 1.4;
+}
+.yr .y {
+  font-weight: 700;
+  font-size: 56px;
+  line-height: 1.1;
+  letter-spacing: 0.01em;
+}
+.yr .y.long {
+  font-size: 40px;
+}
+.yr.side-r .yr-ph {
+  grid-column: 3;
+  grid-row: 1;
+}
+.yr.side-r .lab {
+  grid-column: 1;
+  grid-row: 1;
+  align-items: flex-end;
+  text-align: right;
+}
+.yr.side-l .yr-ph {
+  grid-column: 1;
+  grid-row: 1;
+}
+.yr.side-l .lab {
+  grid-column: 3;
+  grid-row: 1;
+}
+a.yr:hover .yr-ph {
+  opacity: 0.9;
+}
+/* 写真のない年：線の上に、薄い色の年だけを置く */
+.yr.empty {
+  display: flex;
+  justify-content: center;
+  margin: 16px 0 24px;
+}
+.yr.empty .dot {
+  display: none;
+}
+.yr.empty .lab {
+  position: relative;
+  background: var(--surface);
+  color: var(--muted);
+  padding: 6px 0;
+}
+.yr.empty .y {
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.4;
+}
+a.yr.empty .y {
+  color: var(--accent);
+}
+
+/* ---- 年のページ（SPEC §7.4） ---- */
+.year {
+  max-width: var(--max);
+  margin: 0 auto 80px;
+  background: var(--surface);
+  padding: 40px var(--gutter) 96px;
+}
+.back {
+  color: var(--accent);
+  font-weight: 700;
+}
+.year .wa {
+  color: var(--accent);
+  font-weight: 700;
+  margin: 40px 0 0;
+}
+.year .yh {
+  font-size: 72px;
+  font-weight: 700;
+  line-height: 1.1;
+  margin: 0 0 32px;
+  letter-spacing: 0.01em;
+}
+.year .note {
+  margin: -8px 0 32px;
+  max-width: 880px;
+}
+.evnav {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  background: var(--surface);
+  display: flex;
+  gap: 10px;
+  overflow-x: auto;
+  padding: 12px 0;
+  margin-bottom: 24px;
+  border-bottom: 1px solid var(--rule);
+}
+.evnav button {
+  white-space: nowrap;
+  padding: 6px 18px;
+  border: 1px solid var(--rule);
+  border-radius: 999px;
+}
+.evnav button.is-now {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #fff;
+  font-weight: 700;
+}
+.ev {
+  margin: 0 0 56px;
+  scroll-margin-top: 88px;
+}
+.ev h2 {
+  font-size: 32px;
+  font-weight: 700;
+  line-height: 1.3;
+  margin: 0;
+  display: inline;
+}
+.ev .cnt {
+  color: var(--muted);
+  margin-left: 16px;
+}
+.ev-desc {
+  margin: 12px 0 0;
+  max-width: 880px;
+}
+.grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 8px;
+  margin-top: 20px;
+}
+.sentinel {
+  height: 1px;
+}
+.pn {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  border-top: 1px solid var(--rule);
+  padding-top: 32px;
+}
+.pn a {
+  font-weight: 700;
+}
+
+/* ---- 幅 1099px 以下：年代の索引を上の帯へ ---- */
+@media (max-width: 1099px) {
+  .tl-page {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .decades {
+    position: sticky;
+    top: 0;
+    z-index: 2;
+    flex-direction: row;
+    gap: 20px;
+    overflow-x: auto;
+    background: var(--surface);
+    padding: 12px 0;
+    margin: 0 0 24px;
+    border-bottom: 1px solid var(--rule);
+  }
+  .tl-main {
+    margin: 0 auto;
+  }
+  .grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+/* ---- スマホ：線を左に寄せ、年の下に写真 ---- */
+@media (max-width: 767px) {
+  .tl-page {
+    padding: 16px 16px 96px;
+    margin-bottom: 40px;
+  }
+  .tl-page .h1 {
+    font-size: 40px;
+    margin-bottom: 28px;
+  }
+  .tl::before {
+    left: 6px;
+    margin-left: -1px;
+  }
+  .era {
+    text-align: left;
+    padding-left: 32px;
+  }
+  .era::before {
+    display: none;
+  }
+  .yr {
+    grid-template-columns: 32px minmax(0, 1fr);
+    align-items: start;
+    row-gap: 10px;
+    margin-bottom: 36px;
+  }
+  .yr .dot {
+    grid-column: 1;
+    grid-row: 1;
+    justify-self: start;
+    width: 12px;
+    height: 12px;
+    margin-top: 9px;
+    box-shadow: 0 0 0 5px rgba(var(--glow), 0.12);
+  }
+  .yr.side-r .lab,
+  .yr.side-l .lab {
+    grid-column: 2;
+    grid-row: 1;
+    align-items: flex-start;
+    text-align: left;
+  }
+  .yr.side-r .yr-ph,
+  .yr.side-l .yr-ph {
+    grid-column: 2;
+    grid-row: 2;
+  }
+  .yr .y {
+    font-size: 40px;
+  }
+  .yr .y.long {
+    font-size: 32px;
+  }
+  .yr.empty {
+    display: grid;
+    justify-content: stretch;
+    margin: 0 0 24px;
+  }
+  .yr.empty .dot {
+    display: block;
+    width: 8px;
+    height: 8px;
+    margin: 10px 0 0 2px;
+    background: var(--line);
+    box-shadow: none;
+  }
+  .yr.empty .lab {
+    grid-column: 2;
+    padding: 0;
+    background: none;
+  }
+  .year {
+    padding: 20px 16px 72px;
+    margin-bottom: 40px;
+  }
+  .year .wa {
+    margin-top: 24px;
+  }
+  .year .yh {
+    font-size: 52px;
+    margin-bottom: 20px;
+  }
+  .ev h2 {
+    font-size: 28px;
+  }
+  .grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
