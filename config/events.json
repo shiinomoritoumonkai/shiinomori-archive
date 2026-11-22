@@ -1,11 +1,62 @@
 {
-  "categories": ["春合宿", "夏合宿", "秋合宿", "お祭り", "その他"],
+  "categories": [
+    "春合宿",
+    "夏合宿",
+    "秋合宿",
+    "お祭り",
+    "その他"
+  ],
   "rules": [
-    { "includes": ["早稲田祭", "稲門祭"], "category": "その他" },
-    { "includes": ["春合宿"], "category": "春合宿" },
-    { "includes": ["夏合宿"], "category": "夏合宿" },
-    { "includes": ["秋合宿"], "category": "秋合宿" },
-    { "includes": ["祭", "まつり"], "category": "お祭り" }
+    {
+      "includes": [
+        "早稲田祭",
+        "稲門祭"
+      ],
+      "category": "その他"
+    },
+    {
+      "includes": [
+        "春合宿"
+      ],
+      "category": "春合宿"
+    },
+    {
+      "includes": [
+        "夏合宿"
+      ],
+      "category": "夏合宿"
+    },
+    {
+      "includes": [
+        "秋合宿"
+      ],
+      "category": "秋合宿"
+    },
+    {
+      "includes": [
+        "祭",
+        "まつり"
+      ],
+      "category": "お祭り"
+    },
+    {
+      "includes": [
+        "春"
+      ],
+      "category": "春合宿"
+    },
+    {
+      "includes": [
+        "夏"
+      ],
+      "category": "夏合宿"
+    },
+    {
+      "includes": [
+        "秋"
+      ],
+      "category": "秋合宿"
+    }
   ],
   "fallback": "その他"
 }
