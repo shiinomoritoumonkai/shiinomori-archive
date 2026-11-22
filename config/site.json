@@ -1,0 +1,21 @@
+{
+  "title": "思惟の森の会 写真アーカイブ",
+  "officialSite": "https://moriwaseda.wixsite.com/morinokai",
+  "contact": "",
+  "minYear": 1950,
+  "minPhotos": 1,
+  "mapPhotosPerSpot": 16,
+  "imageExtensions": ["jpg", "jpeg", "png", "heic", "heif", "webp", "gif", "tif", "tiff", "bmp"],
+  "imageMimeTypes": ["image/jpeg", "image/png", "image/heic", "image/heif", "image/webp", "image/gif", "image/tiff", "image/bmp"],
+  "sessionDays": 30,
+  "images": {
+    "concurrency": 6,
+    "retryDelaysMs": [1000, 3000, 8000],
+    "widths": { "tile": 400, "cover": 800, "viewer": 1600 },
+    "primary": "https://lh3.googleusercontent.com/d/{id}=w{w}",
+    "fallback": "https://drive.google.com/thumbnail?id={id}&sz=w{w}",
+    "download": "https://drive.google.com/uc?export=download&id={id}",
+    "open": "https://drive.google.com/file/d/{id}/view",
+    "hosts": ["lh3.googleusercontent.com", "drive.google.com"]
+  }
+}

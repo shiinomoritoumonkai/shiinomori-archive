@@ -1,0 +1,17 @@
+[
+  { "id": "seiroku", "name": "青鹿寮", "kana": "せいろくりょう", "category": "dorm", "x": 62, "y": 48, "description": "1971年に完成した宿泊研修施設です。合宿の拠点になっています。" },
+  { "id": "shii", "name": "思惟の森", "kana": "しいのもり", "category": "forest", "x": 66, "y": 42, "description": "青鹿寮のまわりの森林一帯です。「思惟」は小田泰市先生の願いから名づけられました。" },
+  { "id": "mekabu", "name": "芽株山", "kana": "めかぶやま", "category": "forest", "x": 54, "y": 36, "description": "2024年から管理を受託しています。アカマツの稜線で間伐を行います。" },
+  { "id": "omarupe", "name": "オマルペ山", "kana": "おまるぺやま", "category": "forest", "x": 44, "y": 30, "description": "1976年に契約した山です。合宿の最終登山の山になっています。" },
+  { "id": "nanataki", "name": "七滝山", "kana": "ななたきやま", "category": "forest", "x": 36, "y": 52, "description": "1968年に借りた、最初の作業地です。" },
+  { "id": "tsukuehama", "name": "机浜番屋群", "kana": "つくえはまばんやぐん", "category": "community", "x": 84, "y": 56, "description": "漁業と塩づくりのお手伝いをしています。" },
+  { "id": "shimanokoshi", "name": "島越漁港", "kana": "しまのこしぎょこう", "category": "community", "x": 80, "y": 72, "description": "秋に漁業のお手伝いをしています。" },
+  { "id": "raga", "name": "ホテル羅賀荘", "kana": "ほてるらがそう", "category": "community", "x": 82, "y": 64, "description": "観光業のお手伝いをしています。" },
+  { "id": "kitayamazaki", "name": "北山崎ビジターセンター", "kana": "きたやまざきびじたーせんたー", "category": "community", "x": 76, "y": 22, "description": "観光NPOのお手伝いをしています。" },
+  { "id": "akedo", "name": "明戸海岸", "kana": "あけどかいがん", "category": "community", "x": 86, "y": 40, "description": "震災遺構があります。2011年には支援活動を行いました。" },
+  { "id": "hatakeyama", "name": "畠山神社", "kana": "はたけやまじんじゃ", "category": "event", "x": 58, "y": 58, "description": "地区のお祭りが行われます。" },
+  { "id": "yakuba", "name": "田野畑村役場", "kana": "たのはたむらやくば", "category": "event", "x": 64, "y": 60, "description": "挨拶回りや産業まつりで訪れます。" },
+  { "id": "michinoeki", "name": "道の駅たのはた", "kana": "みちのえきたのはた", "category": "community", "x": 60, "y": 66, "description": "物販のお手伝いをしています。" },
+  { "id": "station", "name": "田野畑駅", "kana": "たのはたえき", "category": "scenery", "x": 78, "y": 68, "description": "到着と見送りの場所です。" },
+  { "id": "farm", "name": "村内の農家・牧場", "kana": "そんないののうか・ぼくじょう", "category": "community", "x": 48, "y": 62, "description": "農作業のお手伝いをしています。" }
+]

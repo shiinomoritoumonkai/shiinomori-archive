@@ -1,0 +1,8 @@
+{
+  "image": "map/tanohata.svg",
+  "width": 2400,
+  "height": 1800,
+  "initialCenter": { "x": 64, "y": 50 },
+  "mobileInitialZoom": 1.9,
+  "desktopInitialZoom": 1.0
+}
