@@ -79,6 +79,7 @@
 | 429 が多い（レポートではなくブラウザの開発者ツールで分かる） | `config/site.json` の `images.concurrency` を 6 → 3 に下げる |
 | Drive の URL の形が変わった | `src/lib/photoUrl.ts` と `config/site.json` の `images` を直す。実測の記録は `docs/SPIKE.md` |
 | Actions が失敗した | ログは件数だけ。手元で `pnpm ingest check` を実行すると詳細（フォルダ名）が見える |
+| deploy ジョブだけが失敗した（「No artifacts named github-pages」など） | GitHub 側の一時的なエラー。失敗したジョブの「再実行」ではなく、「Run workflow」で**新しく実行**する（再実行だと成果物が 2 つになって拒否される） |
 | 合言葉を入れても「違います」 | 直前に合言葉を変えた直後なら、反映（数分）を待つ。Safari で 7 日以上開いていないと再入力になるのは正常 |
 
 ## 7. 手元で動かす（開発者向け）

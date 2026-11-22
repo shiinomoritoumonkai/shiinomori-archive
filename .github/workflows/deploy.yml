@@ -61,6 +61,7 @@ jobs:
       contents: read
       pages: write
       id-token: write
+      actions: read
     steps:
       - uses: actions/checkout@v4
       - run: corepack enable
@@ -96,5 +97,14 @@ jobs:
       - uses: actions/upload-pages-artifact@v3
         with:
           path: dist
+      - name: Wait until the artifact is visible (avoids a transient "No artifacts" failure)
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          for i in $(seq 1 12); do
+            if gh api "repos/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID/artifacts" --jq '.artifacts[].name' | grep -qx github-pages; then exit 0; fi
+            sleep 5
+          done
+          echo "artifact not visible yet; continuing anyway"
       - id: deployment
         uses: actions/deploy-pages@v4
