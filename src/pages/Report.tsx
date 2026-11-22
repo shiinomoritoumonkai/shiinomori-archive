@@ -37,7 +37,7 @@ export function ReportPage({ cryptoKey }: { cryptoKey: CryptoKey }) {
       </dl>
 
       <h2 class="h2">年ごとのイベント</h2>
-      <div class="table-wrap"><table class="report-table">
+      <div class="table-wrap" tabIndex={0} role="region" aria-label="年ごとのイベントの表"><table class="report-table">
         <thead>
           <tr>
             <th>年</th>
@@ -76,7 +76,7 @@ export function ReportPage({ cryptoKey }: { cryptoKey: CryptoKey }) {
       </table></div>
 
       <h2 class="h2">マップ</h2>
-      <div class="table-wrap"><table class="report-table">
+      <div class="table-wrap" tabIndex={0} role="region" aria-label="マップの表"><table class="report-table">
         <thead>
           <tr>
             <th>スポット</th>
@@ -97,7 +97,7 @@ export function ReportPage({ cryptoKey }: { cryptoKey: CryptoKey }) {
       {report.warnings.length === 0 ? (
         <p>警告はありません。</p>
       ) : (
-        <div class="table-wrap"><table class="report-table">
+        <div class="table-wrap" tabIndex={0} role="region" aria-label="警告の表"><table class="report-table">
           <thead>
             <tr>
               <th>コード</th>
