@@ -160,6 +160,24 @@ describe('walkArchive（SPEC §4.3 のツリー）', () => {
   });
 });
 
+describe('dimensionsOf（rotation が奇数なら幅と高さを入れ替える。M0 の実測）', () => {
+  it('rotation 1・3 は入れ替え、0・2 はそのまま、なしもそのまま', () => {
+    const tree = folder('root', [
+      folder('1990年_夏合宿', [
+        file({ name: 'r0.jpg', w: 4000, h: 3000, rotation: 0 }),
+        file({ name: 'r1.jpg', w: 4000, h: 3000, rotation: 1 }),
+        file({ name: 'r2.jpg', w: 4000, h: 3000, rotation: 2 }),
+        file({ name: 'r3.jpg', w: 4000, h: 3000, rotation: 3 }),
+        file({ name: 'rn.jpg', w: 4000, h: 3000 }),
+      ]),
+    ]);
+    const r = walkArchive(tree, opts);
+    const ps = r.years.get('1990')!.events.get('夏合宿')!.photos;
+    const dims = Object.fromEntries(ps.map((p) => [p.name, [p.photo.w, p.photo.h]]));
+    expect(dims).toEqual({ 'r0.jpg': [4000, 3000], 'r1.jpg': [3000, 4000], 'r2.jpg': [4000, 3000], 'r3.jpg': [3000, 4000], 'rn.jpg': [4000, 3000] });
+  });
+});
+
 describe('categorize', () => {
   it('規則を上から順に当てる', () => {
     expect(categorize('夏合宿', eventsConfig)).toBe('夏合宿');
