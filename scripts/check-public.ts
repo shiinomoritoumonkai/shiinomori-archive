@@ -34,7 +34,9 @@ for (const f of files) {
   const rel = relative(dist, f);
   if (rel.startsWith('data/') && rel.endsWith('.bin')) continue;
   if (!textExt.test(rel)) continue;
-  const text = readFileSync(f, 'utf8');
+  const raw = readFileSync(f, 'utf8');
+  // Vite のアセット名（name-hash.ext）は ID の検査から除く
+  const text = raw.replace(/[\w.-]+-[A-Za-z0-9_-]{8}\.(?:woff2?|js|css|svg|png|jpg|webp)/g, 'ASSET');
   for (const s of secrets) if (text.includes(s)) problems.push(`${rel}: 秘密の値が含まれています`);
   if (rel === 'data/manifest.json') continue;
   if (rel.endsWith('.json') && text.includes('"yearKey"')) problems.push(`${rel}: 平文の一覧らしき JSON があります`);

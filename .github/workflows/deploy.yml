@@ -1,0 +1,87 @@
+# SPEC §12.2
+# - pull_request：フィクスチャでテストとビルドだけ（秘密の値は使わない）
+# - main への push と手動実行：テスト → 実データで ingest build → ビルド → check:public → Pages へデプロイ
+name: build-and-deploy
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: corepack enable
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm typecheck
+      - run: pnpm test
+      - run: pnpm exec playwright install --with-deps chromium
+      - run: pnpm e2e:prepare
+        env:
+          PAGES_BASE: /${{ github.event.repository.name }}/
+      - run: pnpm e2e
+        env:
+          PAGES_BASE: /${{ github.event.repository.name }}/
+      - run: pnpm check:public
+      - uses: actions/upload-artifact@v4
+        if: failure()
+        with:
+          name: playwright-report
+          path: playwright-report
+          retention-days: 7
+
+  deploy:
+    if: github.event_name != 'pull_request'
+    needs: test
+    runs-on: ubuntu-latest
+    environment:
+      name: production
+      url: ${{ steps.deployment.outputs.page_url }}
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+    steps:
+      - uses: actions/checkout@v4
+      - run: corepack enable
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - name: Ingest from Drive (counts only in logs)
+        run: pnpm ingest build
+        env:
+          CI: 'true'
+          SITE_PASSWORD: ${{ secrets.SITE_PASSWORD }}
+          GOOGLE_SERVICE_ACCOUNT_KEY_B64: ${{ secrets.GOOGLE_SERVICE_ACCOUNT_KEY_B64 }}
+          DRIVE_ARCHIVE_ROOT_ID: ${{ secrets.DRIVE_ARCHIVE_ROOT_ID }}
+          DRIVE_MAP_ROOT_ID: ${{ secrets.DRIVE_MAP_ROOT_ID }}
+      - run: pnpm build
+        env:
+          PAGES_BASE: ${{ vars.PAGES_BASE || format('/{0}/', github.event.repository.name) }}
+      - run: pnpm check:public
+        env:
+          DRIVE_ARCHIVE_ROOT_ID: ${{ secrets.DRIVE_ARCHIVE_ROOT_ID }}
+          DRIVE_MAP_ROOT_ID: ${{ secrets.DRIVE_MAP_ROOT_ID }}
+          SITE_PASSWORD: ${{ secrets.SITE_PASSWORD }}
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist
+      - id: deployment
+        uses: actions/deploy-pages@v4

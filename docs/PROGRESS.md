@@ -8,12 +8,19 @@
 - 2026-11-22 Vite の `base`：GitHub Variables の `PAGES_BASE` があればそれ、なければ `/<リポジトリ名>/`。
 
 ## 終わったこと
+- 2026-11-22 M2（Drive 非依存部分）：ハッシュルーター、鍵の導出と保存（localStorage、30 日）、入口、データの取得・復号・キャッシュ、`photoUrl`、画像キュー（同時 6 本・1/3/8 秒再試行・予備 URL）、ヘッダー/フッター、レポート画面、§8 の色・書体（Noto Sans JP を unicode-range 分割で自前配信、woff2 のみ）・20px、本番ビルドだけ CSP meta、`check:public`、GitHub Actions（PR はフィクスチャのみ／main と手動は environment: production で実データ → Pages）。E2E 6 件（390×844 と 1280×800）通過。**デプロイ先での確認は未検証（Drive の準備待ち）。**
+- 2026-11-22 M1（Drive 非依存部分）：§4 の規則（`shared/`）と §4.3 のテスト 46 件、暗号（Web Crypto 共通実装）とテスト、取り込み CLI（build/check/verify、`--from`、`--save`）、フィクスチャ生成（12,000 枚相当）、`pnpm crypto:rotate`。フィクスチャで index.bin 0.7KB、データ全体 148KB。
+- 2026-11-22 環境：Node 22（Homebrew node@22 をリンク。/opt/homebrew/bin が /usr/local/bin の Node 16 より先）、pnpm 12（corepack）、Playwright chromium。
 - 2026-11-22 `.claude/settings.json`、`docs/SETUP.md`、`.env.example`、`CLAUDE.md`、この文書。
 
 ## いまの状態 / 次にやること
-- M0 は Drive の準備待ち（稲葉さんが SETUP.md の 1〜3 を実施中）。
-- 先に M1 の Drive に触らない部分（§4 の規則とテスト、§6 の型と暗号、フィクスチャ）を進める。
-- Drive の準備ができたら `local/spike/` を作って M0 を実測 → `docs/SPIKE.md` → 止まって報告。
+- **Drive の準備待ち**（稲葉さんが SETUP.md の 1〜3 を実施）。`.env` ができたら：
+  1. `pnpm ingest check` で接続確認。
+  2. M0：`local/spike/` のスクリプトで実測 → `docs/SPIKE.md` に数字 → `config/site.json` の URL 形式・並列数・再試行を確定 → **止まって報告**。
+  3. M1 の締め：実 Drive で `pnpm ingest check` の結果を見せる → 稲葉さんがフォルダを直す → **止まって報告**。
+  4. M2 の締め：push → Actions → デプロイ先で合言葉 → レポート画面。CI ログに ID・名前・パスがないことを目視。
+- そのあと M3（マップ）→ M4（年表・年のページ・ビューア）→ M5。画面の作り込みは M0 の結果が出てから。
+- まだ push していない（稲葉さんの指示待ち）。
 
 ## 未検証・保留
 - `drive.metadata.readonly` で足りるか（M0）。

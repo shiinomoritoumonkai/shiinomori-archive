@@ -8,7 +8,7 @@
     "node": ">=22.18"
   },
   "scripts": {
-    "dev": "vite",
+    "dev": "VITE_PHOTO_SOURCE=local vite",
     "build": "vite build",
     "preview": "vite preview",
     "typecheck": "tsc -p tsconfig.json --noEmit",
@@ -18,7 +18,9 @@
     "fixtures": "node scripts/fixtures/generate.ts",
     "ingest": "node --env-file-if-exists=.env scripts/ingest/cli.ts",
     "check:public": "node scripts/check-public.ts",
-    "crypto:rotate": "node scripts/crypto-rotate.ts"
+    "crypto:rotate": "node scripts/crypto-rotate.ts",
+    "e2e:prepare": "pnpm fixtures && SITE_PASSWORD=fixture-password-1234 node scripts/ingest/cli.ts build --from fixtures/listing.json && VITE_PHOTO_SOURCE=local vite build",
+    "dev:drive": "vite"
   },
   "dependencies": {
     "preact": "^11.2.0"
