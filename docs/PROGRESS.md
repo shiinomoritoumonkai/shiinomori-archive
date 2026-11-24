@@ -3,6 +3,7 @@
 セッションをまたいで再開するためのメモ。上が新しい。
 
 ## 決めたこと
+- 2026-11-24 稲葉さんの判断：(1) `1988夏` 形式は規則を緩和（PR #1 をマージ。SPEC §4.2-2・9 と §4.3 の表を更新）、(2) `/1961/1960` は稲葉さんが手動で直すので保留、(3) マップ用フォルダの写真は来週投入、(4) 村の観光マップの使用許可は取得済み。
 - 2026-11-22 §13 の回答：Drive は個人のマイドライブ／ルートフォルダとサービスアカウントは未作成（SETUP.md 先行）／リポジトリ `shiinomoritoumonkai/shiinomori-archive`（公開、Pages は Actions 配信、独自ドメインなし）／Secrets は Environment「production」に `.env.example` と同名で／マップ画像とスポット一覧は未着（仮画像と付録 A）。
 - 2026-11-22 技術選定：Vite + TypeScript(strict) + Preact、Vitest、Playwright、`@googleapis/drive`、`@fontsource/noto-sans-jp`、pnpm。Node 22 LTS。
 - 2026-11-22 Vite の `base`：GitHub Variables の `PAGES_BASE` があればそれ、なければ `/<リポジトリ名>/`。
@@ -28,7 +29,7 @@
 ## いまの状態 / 次にやること
 - 2026-11-22 push 済み（gh で `shiinomoritoumonkai` としてブラウザ認証。`gh auth setup-git`。scope に workflow が必要だった）。Actions の test ジョブは GitHub 上でも通過（E2E 20 件）。
 - **実データ版を公開中**：https://shiinomoritoumonkai.github.io/shiinomori-archive/ （本番の合言葉）。以後は push と Run workflow（source=drive）で自動更新。仮データに戻すときは source=fixtures。
-- 稲葉さんの返事待ち：(1) フォルダ名 `1988夏` 形式 → 緩和案を PR #1（ブランチ `relaxed-year-names`）に用意。採用ならマージ、不採用なら閉じて Drive 側を改名、(2) `/1961/1960`、(3) マップ用フォルダへの写真、(4) M0 の他環境確認（`local/spike/README.md` 手順 3）、(5) 実物のマップ画像とスポットの座標（`?picker=1`）。
+- 残り：(a) `/1961/1960` の手動修正（稲葉さん）、(b) マップ用フォルダへの写真投入（来週）→ 投入後に Run workflow、(c) スポットの座標の微調整（`?picker=1`）と説明文の見直し、(d) M0 の他環境確認は稲葉さんの iPhone/PC での本番確認で代替済み。
 - 残りの M5：実データでの通し確認（最多年の灰色残り 1% 未満）、SETUP.md の最終化（push 権限の項を追加済み）。
 - E2E の `?p=0` の不安定さは、ビューアのキー操作が古い index を使う競合だった（修正済み）。
 
