@@ -30,9 +30,9 @@ jobs:
   test:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - run: corepack enable
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@v7
         with:
           node-version: 22
           cache: pnpm
@@ -43,7 +43,7 @@ jobs:
       - run: pnpm e2e:prepare
       - run: pnpm e2e
       - run: pnpm check:public
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v7
         if: failure()
         with:
           name: playwright-report
@@ -63,9 +63,9 @@ jobs:
       id-token: write
       actions: read
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - run: corepack enable
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@v7
         with:
           node-version: 22
           cache: pnpm
@@ -93,8 +93,8 @@ jobs:
           DRIVE_ARCHIVE_ROOT_ID: ${{ secrets.DRIVE_ARCHIVE_ROOT_ID }}
           DRIVE_MAP_ROOT_ID: ${{ secrets.DRIVE_MAP_ROOT_ID }}
           SITE_PASSWORD: ${{ secrets.SITE_PASSWORD }}
-      - uses: actions/configure-pages@v5
-      - uses: actions/upload-pages-artifact@v3
+      - uses: actions/configure-pages@v6
+      - uses: actions/upload-pages-artifact@v5
         with:
           path: dist
       - name: Wait until the artifact is visible (avoids a transient "No artifacts" failure)
@@ -107,11 +107,11 @@ jobs:
           done
           echo "artifact not visible yet; continuing anyway"
       - id: deployment
-        uses: actions/deploy-pages@v4
+        uses: actions/deploy-pages@v5
         continue-on-error: true
       # GitHub 側で成果物が一時的に見えないことがある（"No artifacts named github-pages"）。30 秒おいて 1 回だけやり直す
       - if: steps.deployment.outcome == 'failure'
         run: sleep 30
       - id: deployment-retry
         if: steps.deployment.outcome == 'failure'
-        uses: actions/deploy-pages@v4
+        uses: actions/deploy-pages@v5
