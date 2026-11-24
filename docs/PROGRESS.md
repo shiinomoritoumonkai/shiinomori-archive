@@ -8,6 +8,7 @@
 - 2026-11-22 Vite の `base`：GitHub Variables の `PAGES_BASE` があればそれ、なければ `/<リポジトリ名>/`。
 
 ## 終わったこと
+- 2026-11-24 稲葉さんが公開先で本番の合言葉でログインし、レポート・年表・1989 年の全スクロール・ビューア・マップを PC と iPhone で確認して OK。**M2 と M5 の実データ確認は完了。**
 - 2026-11-24 **実データ版をデプロイ**（production の Secrets 登録後、source=drive で成功）。CI ログは件数と警告コードのみで ID・名前・パスなし（目視済み）。check:public OK（JS gzip 19.2 KB、index.bin 0.4 KB）。公開先の data/*.bin と地図画像が 200。**公開先で合言葉を入れての動作確認は稲葉さん（本番の合言葉は私が知らない）。**
 - 2026-11-23 実データで手元の通し確認（`SITE_PASSWORD` を確認用の値で上書きして `pnpm ingest build` → `pnpm build` → preview を Playwright で操作）：年表の表紙 4/4 表示、1989 年 263 枚は失敗 0（30 秒時点で PC 235 枚・スマホ 191 枚表示、残りは読み込み待ち）、Drive の応答はすべて 200、ビューアは 1600×2279 の縦位置写真が正しい向き。
 - 2026-11-23 実 Drive で `pnpm ingest verify`：11 枚（各年の表紙＋各イベント 1 枚）すべて 200。deploy ジョブに成果物の反映待ちを追加、再実行の落とし穴を OPERATIONS.md に記載。
@@ -27,7 +28,6 @@
 ## いまの状態 / 次にやること
 - 2026-11-22 push 済み（gh で `shiinomoritoumonkai` としてブラウザ認証。`gh auth setup-git`。scope に workflow が必要だった）。Actions の test ジョブは GitHub 上でも通過（E2E 20 件）。
 - **実データ版を公開中**：https://shiinomoritoumonkai.github.io/shiinomori-archive/ （本番の合言葉）。以後は push と Run workflow（source=drive）で自動更新。仮データに戻すときは source=fixtures。
-- 稲葉さんが公開先で PC と iPhone から確認（レポート → マップ → 年表 → 1989 年を最後まで → ビューア）。灰色のまま残る写真が 1% 未満なら M5 の実データ確認は完了。
 - 稲葉さんの返事待ち：(1) フォルダ名 `1988夏` 形式 → 緩和案を PR #1（ブランチ `relaxed-year-names`）に用意。採用ならマージ、不採用なら閉じて Drive 側を改名、(2) `/1961/1960`、(3) マップ用フォルダへの写真、(4) M0 の他環境確認（`local/spike/README.md` 手順 3）、(5) 実物のマップ画像とスポットの座標（`?picker=1`）。
 - 残りの M5：実データでの通し確認（最多年の灰色残り 1% 未満）、SETUP.md の最終化（push 権限の項を追加済み）。
 - E2E の `?p=0` の不安定さは、ビューアのキー操作が古い index を使う競合だった（修正済み）。
