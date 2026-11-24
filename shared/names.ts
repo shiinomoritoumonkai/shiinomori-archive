@@ -57,8 +57,8 @@ export function parseFolderName(raw: string, range: YearRange): ParsedName {
   }
 
   if (suffix === undefined) {
-    // 直後が区切りか名前の終わりのときだけ年とみなす
-    if (restRaw !== '' && !SEP.test(restRaw)) return { ...base, badYear: true };
+    // 直後が区切り・名前の終わり・数字以外の文字（例「1988夏」）のときに年とみなす。数字が続く（「19901」など）なら年ではない
+    if (restRaw !== '' && !SEP.test(restRaw) && /^[0-9]/.test(restRaw)) return { ...base, badYear: true };
   }
   if (!inRange) return { ...base, badYear: true };
   const rest = stripSeparators(restRaw);

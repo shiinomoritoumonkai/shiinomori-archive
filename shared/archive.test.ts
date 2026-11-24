@@ -186,6 +186,9 @@ describe('categorize', () => {
     expect(categorize('稲門祭', eventsConfig)).toBe('その他');
     expect(categorize('50周年記念式典', eventsConfig)).toBe('その他');
     expect(categorize('', eventsConfig)).toBe('その他');
+    expect(categorize('夏', eventsConfig)).toBe('夏合宿');
+    expect(categorize('1988秋', eventsConfig)).toBe('秋合宿');
+    expect(categorize('夏祭り', eventsConfig)).toBe('お祭り');
   });
 });
 
