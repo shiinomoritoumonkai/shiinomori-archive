@@ -10,6 +10,7 @@
 - 2026-11-22 Vite の `base`：GitHub Variables の `PAGES_BASE` があればそれ、なければ `/<リポジトリ名>/`。
 
 ## 終わったこと
+- 2026-11-24 サイト名の変更を公開先に反映。Pages のデプロイが「No artifacts named github-pages」で散発的に落ちるため、deploy-pages を 30 秒おいて 1 回再試行する仕組みを追加し、アクションを現行の大版に更新（checkout v7、setup-node v7、upload-artifact v7、configure-pages v6、upload-pages-artifact v5、deploy-pages v5）。更新後の実行は 1 回で成功。
 - 2026-11-24 稲葉さんが公開先で本番の合言葉でログインし、レポート・年表・1989 年の全スクロール・ビューア・マップを PC と iPhone で確認して OK。**M2 と M5 の実データ確認は完了。**
 - 2026-11-24 **実データ版をデプロイ**（production の Secrets 登録後、source=drive で成功）。CI ログは件数と警告コードのみで ID・名前・パスなし（目視済み）。check:public OK（JS gzip 19.2 KB、index.bin 0.4 KB）。公開先の data/*.bin と地図画像が 200。**公開先で合言葉を入れての動作確認は稲葉さん（本番の合言葉は私が知らない）。**
 - 2026-11-23 実データで手元の通し確認（`SITE_PASSWORD` を確認用の値で上書きして `pnpm ingest build` → `pnpm build` → preview を Playwright で操作）：年表の表紙 4/4 表示、1989 年 263 枚は失敗 0（30 秒時点で PC 235 枚・スマホ 191 枚表示、残りは読み込み待ち）、Drive の応答はすべて 200、ビューアは 1600×2279 の縦位置写真が正しい向き。
