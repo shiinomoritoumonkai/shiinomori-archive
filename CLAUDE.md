@@ -1,6 +1,6 @@
 # shiinomori-archive
 
-思惟の森の会 写真アーカイブ（GitHub Pages ＋ Google Drive）。仕様は `docs/SPEC.md`、進捗は `docs/PROGRESS.md`。セッション開始時はこの 2 つを読む。運用手順は `docs/OPERATIONS.md`、M0 の実測は `docs/SPIKE.md`。
+思惟の森の会 資料アーカイブ（GitHub Pages ＋ Google Drive）。サイト名は config/site.json の title。画面の文言では「思惟の森の会」を繰り返さない（自明なので）。仕様は `docs/SPEC.md`、進捗は `docs/PROGRESS.md`。セッション開始時はこの 2 つを読む。運用手順は `docs/OPERATIONS.md`、M0 の実測は `docs/SPIKE.md`。
 
 ## コマンド（pnpm / Node 22）
 - `pnpm dev` 開発サーバー（仮画像）／`pnpm dev:drive` 実 Drive の画像で／`pnpm build` ビルド／`pnpm preview`

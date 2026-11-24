@@ -3,6 +3,7 @@
 セッションをまたいで再開するためのメモ。上が新しい。
 
 ## 決めたこと
+- 2026-11-24 サイト名を「思惟の森の会 資料アーカイブ」に変更（年表に紙資料も載せる予定）。画面の文言では「思惟の森の会」を最低限に（フッターは「公式サイト」、入口の説明文から削除）。
 - 2026-11-24 稲葉さんの判断：(1) `1988夏` 形式は規則を緩和（PR #1 をマージ。SPEC §4.2-2・9 と §4.3 の表を更新）、(2) `/1961/1960` は稲葉さんが手動で直すので保留、(3) マップ用フォルダの写真は来週投入、(4) 村の観光マップの使用許可は取得済み。
 - 2026-11-22 §13 の回答：Drive は個人のマイドライブ／ルートフォルダとサービスアカウントは未作成（SETUP.md 先行）／リポジトリ `shiinomoritoumonkai/shiinomori-archive`（公開、Pages は Actions 配信、独自ドメインなし）／Secrets は Environment「production」に `.env.example` と同名で／マップ画像とスポット一覧は未着（仮画像と付録 A）。
 - 2026-11-22 技術選定：Vite + TypeScript(strict) + Preact、Vitest、Playwright、`@googleapis/drive`、`@fontsource/noto-sans-jp`、pnpm。Node 22 LTS。

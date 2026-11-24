@@ -29,7 +29,7 @@ export function LoginPage({ next }: { next: string }) {
     <main class="gate">
       <form class="gate-card" onSubmit={submit}>
         <h1 class="gate-h1">{site.title}</h1>
-        <p class="gate-lead">会員・OB/OG・村の関係者で共有する、思惟の森の会の写真です。合言葉を入れてください。</p>
+        <p class="gate-lead">会員・OB/OG・村の関係者で共有する写真と資料です。合言葉を入れてください。</p>
         <label class="gate-label" for="pw">
           合言葉
         </label>

@@ -8,7 +8,7 @@ test('合言葉なしで /#/map と /#/timeline を開くと入口へ移る', as
   await expect(page).toHaveURL(/#\/login\?next=%2Fmap/);
   await page.goto('#/timeline');
   await expect(page).toHaveURL(/#\/login\?next=%2Ftimeline/);
-  await expect(page.getByRole('heading', { name: '思惟の森の会 写真アーカイブ' })).toBeVisible();
+  await expect(page.getByRole('heading', { name: '思惟の森の会 資料アーカイブ' })).toBeVisible();
   await expectTypographyAndNoOverflow(page);
 });
 

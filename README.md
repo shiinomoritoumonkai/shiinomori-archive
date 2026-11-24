@@ -1,6 +1,6 @@
 # shiinomori-archive
 
-思惟の森の会 写真アーカイブサイト。GitHub Pages（静的サイト）＋ Google Drive のフォルダ階層をそのまま読み込む。
+思惟の森の会 資料アーカイブ（写真と、いずれ紙資料）のサイト。GitHub Pages（静的サイト）＋ Google Drive のフォルダ階層をそのまま読み込む。
 
 - 仕様：`docs/SPEC.md`
 - 初回セットアップ：`docs/SETUP.md`

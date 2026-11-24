@@ -18,7 +18,7 @@ export function Footer() {
     <footer class="foot">
       <div class="foot-in">
         <a href={site.officialSite} target="_blank" rel="noopener noreferrer">
-          思惟の森の会 公式サイト
+          公式サイト
         </a>
         {site.contact ? <span>問い合わせ：{site.contact}</span> : null}
         {builtAt ? <span>最終更新：{builtAt}</span> : null}
